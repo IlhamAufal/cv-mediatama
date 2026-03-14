@@ -11,6 +11,11 @@ class Konten extends Model
         'title',
         'description',
         'file_path',
+        'thumbnail_path',
     ];
 
+    public function pengajuan()
+    {
+        return $this->hasMany(Pengajuan::class);
+    }
 }

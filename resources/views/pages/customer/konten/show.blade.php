@@ -13,7 +13,7 @@
                 </p>
             </div>
             <div>
-                <a href="{{ route('admin.konten.index') }}"
+                <a href="{{ route('customer.konten.index') }}"
                     class="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-100 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition">
                     <i class="fa-solid fa-arrow-left"></i>
                     Kembali
@@ -59,7 +59,7 @@
                                 class="block text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
                                 Deskripsi
                             </label>
-                            <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300 whitespace-pre-line">
+                            <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300 whitespace-pre-line">
                                 {{ $konten->description ?: '-' }}
                             </p>
                         </div>
@@ -67,26 +67,20 @@
                         <div>
                             <label
                                 class="block text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                                Tanggal Upload
+                                Batas Waktu Akses
                             </label>
-                            <p class="mt-1 text-base font-medium text-gray-900 dark:text-white">
-                                {{ $konten->created_at->format('d F Y, H:i') }}
+                            <p class="mt-1 text-base font-medium {{ $pengajuan && $pengajuan->expired_at && $pengajuan->expired_at->isPast() ? 'text-red-500' : 'text-gray-900 dark:text-white' }}">
+                                @if ($pengajuan && $pengajuan->expired_at)
+                                    {{ $pengajuan->expired_at->format('d F Y, H:i') }}
+                                    @if ($pengajuan->expired_at->isPast())
+                                        <span class="text-xs text-red-500">(Kadaluarsa)</span>
+                                    @endif
+                                @else
+                                    -
+                                @endif
                             </p>
                         </div>
 
-                        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex gap-3">
-                                <a href="{{ route('admin.konten.edit', $konten->id) }}"
-                                    class="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition">
-                                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                                </a>
-                                <button type="button"
-                                    onclick="openDeleteModal('{{ route('admin.konten.destroy', $konten->id) }}')"
-                                    class="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition">
-                                    <i class="fa-solid fa-trash-can"></i> Hapus
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

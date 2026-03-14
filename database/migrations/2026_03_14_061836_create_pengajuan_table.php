@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('video_accesses', function (Blueprint $table) {
+        Schema::create('pengajuan', function (Blueprint $table) {
             $table->id();
             
             // Relasi ke tabel users dan videos (jika data induk dihapus, riwayat ini ikut terhapus)
@@ -27,6 +27,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('video_accesses');
+        Schema::dropIfExists('pengajuan');
     }
 };

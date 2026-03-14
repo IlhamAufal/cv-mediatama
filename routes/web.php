@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KontenController;
+use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +24,7 @@ Route::middleware('auth')->group(function () {
         if (Auth::check() && Auth::user()->role === 'admin') {
             return redirect()->route('admin.dashboard');
         }
+
         return redirect()->route('customer.dashboard');
     });
 
@@ -33,17 +36,31 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-
-
     Route::resource('/users', UserController::class)->names(['users']);
 
-    Route::get('/konten', [\App\Http\Controllers\KontenController::class, 'index'])->name('konten.index');
-    Route::get('/konten/create', [\App\Http\Controllers\KontenController::class, 'create'])->name('konten.create');
-    Route::post('/konten', [\App\Http\Controllers\KontenController::class, 'store'])->name('konten.store');
-    Route::get('/konten/{konten}', [\App\Http\Controllers\KontenController::class, 'show'])->name('konten.show');
-    Route::get('/konten/{konten}/edit', [\App\Http\Controllers\KontenController::class, 'edit'])->name('konten.edit');
-    Route::put('/konten/{konten}', [\App\Http\Controllers\KontenController::class, 'update'])->name('konten.update');
-    Route::delete('/konten/{konten}', [\App\Http\Controllers\KontenController::class, 'destroy'])->name('konten.destroy');
+    // ─── Customer: Pengajuan Akses Konten ────────────────────────────────────
+    Route::middleware('role:customer')->prefix('customer')->name('customer.')->group(function () {
+        Route::get('/konten', [KontenController::class, 'index'])->name('konten.index');
+        Route::get('/konten/riwayat-pengajuan', [PengajuanController::class, 'riwayatPengajuan'])->name('pengajuan.riwayat');
+        Route::get('/konten/{konten}', [KontenController::class, 'show'])->name('konten.show');
+        Route::post('/konten/{konten}/pengajuan', [PengajuanController::class, 'store'])->name('pengajuan.store');
+    });
+
+    // ─── Admin Routes ────────────────────────────────────────────────────────
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/pengajuan', [PengajuanController::class, 'index'])->name('pengajuan.index');
+        Route::put('/pengajuan/{pengajuan}/approve', [PengajuanController::class, 'approve'])->name('pengajuan.approve');
+        Route::put('/pengajuan/{pengajuan}/reject', [PengajuanController::class, 'reject'])->name('pengajuan.reject');
+        
+        Route::get('/konten', [KontenController::class, 'index'])->name('konten.index');
+        Route::get('/konten/create', [KontenController::class, 'create'])->name('konten.create');
+        Route::post('/konten', [KontenController::class, 'store'])->name('konten.store');
+        Route::get('/konten/{konten}', [KontenController::class, 'show'])->name('konten.show');
+        Route::get('/konten/{konten}/edit', [KontenController::class, 'edit'])->name('konten.edit');
+        Route::put('/konten/{konten}', [KontenController::class, 'update'])->name('konten.update');
+        Route::delete('/konten/{konten}', [KontenController::class, 'destroy'])->name('konten.destroy');
+
+    });
 
     Route::get('/blank', fn () => view('pages.blank', ['title' => 'Blank']))->name('blank');
     Route::get('/error-404', fn () => view('pages.errors.error-404', ['title' => 'Error 404']))->name('error-404');

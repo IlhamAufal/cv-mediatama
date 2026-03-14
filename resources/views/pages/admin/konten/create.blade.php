@@ -13,7 +13,7 @@
                 </p>
             </div>
             <div>
-                <a href="{{ route('konten.index') }}"
+                <a href="{{ route('admin.konten.index') }}"
                     class="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-100 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition">
                     <i class="fa-solid fa-arrow-left"></i>
                     Kembali
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <form action="{{ route('konten.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.konten.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-1 gap-6">
                 <!-- Judul -->

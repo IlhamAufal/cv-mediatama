@@ -19,8 +19,8 @@ class MenuHelper
                 'icon' => 'forms',
                 'name' => 'Konten',
                 'subItems' => [
-                    ['name' => 'lihat konten',  'path' => '/konten'],
-                    ['name' => 'pengajuan akses konten', 'path' => '/konten/pengajuan'],
+                    ['name' => 'lihat konten',  'path' => '/customer/konten'],
+                    ['name' => 'riwayat pengajuan', 'path' => '/customer/konten/riwayat-pengajuan'],
                 ],
             ],
 
@@ -48,8 +48,8 @@ class MenuHelper
                 'icon' => 'forms',
                 'name' => 'Konten',
                 'subItems' => [
-                    ['name' => 'manajemen konten',  'path' => '/konten'],
-                    ['name' => 'pengajuan akses konten', 'path' => '/konten/pengajuan'],
+                    ['name' => 'manajemen konten',  'path' => '/admin/konten'],
+                    ['name' => 'pengajuan akses konten', 'path' => '/admin/pengajuan'],
                 ],
             ],
         ];
@@ -59,17 +59,6 @@ class MenuHelper
      * Menu untuk superadmin.
      * Akses penuh ke seluruh fitur dan konfigurasi sistem.
      */
-
-    public static function getOthersItems(): array
-    {
-        return [
-            [
-                'icon' => 'user-profile',
-                'name' => 'Informasi Profil',
-                'path' => '/profile',
-            ],
-        ];
-    }
 
     /**
      * Kembalikan menu group berdasarkan role user yang sedang login.
@@ -88,10 +77,6 @@ class MenuHelper
             [
                 'title' => 'Menu',
                 'items' => $mainItems,
-            ],
-            [
-                'title' => 'Others',
-                'items' => self::getOthersItems(),
             ],
         ];
     }

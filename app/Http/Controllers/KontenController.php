@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Konten;
+use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 
 class KontenController extends Controller
@@ -13,7 +14,19 @@ class KontenController extends Controller
     public function index()
     {
         $kontens = Konten::latest()->paginate(10);
-        return view('pages.admin.konten.index', compact('kontens'));
+
+        if (auth()->user()->role === 'admin') {
+            return view('pages.admin.konten.index', compact('kontens'));
+        }
+
+        // Customer: tambahkan info status pengajuan per konten
+        $userId = auth()->id();
+        $pengajuanMap = Pengajuan::where('user_id', $userId)
+            ->whereIn('konten_id', $kontens->pluck('id'))
+            ->get()
+            ->keyBy('konten_id');
+
+        return view('pages.customer.konten.index', compact('kontens', 'pengajuanMap'));
     }
 
     /**
@@ -46,7 +59,7 @@ class KontenController extends Controller
 
         Konten::create($data);
 
-        return redirect()->route('konten.index')->with('success', 'Konten berhasil ditambahkan!');
+        return redirect()->route('customer.konten.index')->with('success', 'Konten berhasil ditambahkan!');
     }
 
     /**
@@ -54,7 +67,17 @@ class KontenController extends Controller
      */
     public function show(Konten $konten)
     {
-        return view('pages.admin.konten.show', compact('konten'));
+        if (auth()->user()->role === 'admin') {
+            return view('pages.admin.konten.show', compact('konten'));
+        }
+
+        $pengajuan = Pengajuan::where('user_id', auth()->id())
+            ->where('konten_id', $konten->id)
+            ->where('status', 'approved')
+            ->latest()
+            ->first();
+
+        return view('pages.customer.konten.show', compact('konten', 'pengajuan'));
     }
 
     /**
@@ -80,8 +103,8 @@ class KontenController extends Controller
 
         if ($request->hasFile('file_path')) {
             // Delete old file if exists
-            if ($konten->file_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($konten->file_path)) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($konten->file_path);
+            if ($konten->file_path && asset('public')->exists($konten->file_path)) {
+                asset('public')->delete($konten->file_path);
             }
 
             $file = $request->file('file_path');
@@ -92,7 +115,7 @@ class KontenController extends Controller
 
         $konten->update($data);
 
-        return redirect()->route('konten.index')->with('success', 'Konten berhasil diperbarui!');
+        return redirect()->route('admin.konten.index')->with('success', 'Konten berhasil diperbarui!');
     }
 
     /**
@@ -106,4 +129,5 @@ class KontenController extends Controller
         $konten->delete();
         return redirect()->route('konten.index')->with('success', 'Konten berhasil dihapus!');
     }
+
 }

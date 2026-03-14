@@ -12,7 +12,7 @@
                 </p>
             </div>
             <div>
-                <a href='{{ route('konten.create') }}'
+                <a href='{{ route('admin.konten.create') }}'
                     class='inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition'>
                     <i class='fa-solid fa-plus'></i>
                     Tambah Konten
@@ -39,16 +39,17 @@
                             <td class='whitespace-nowrap px-4 py-3'>{{ $konten->created_at->format('d M Y') }}</td>
                             <td class='whitespace-nowrap px-4 py-3 text-right'>
                                 <div class='flex items-center justify-end gap-3'>
-                                    <a href='{{ route('konten.show', $konten->id) }}' title='Detail'
+                                    <a href='{{ route('admin.konten.show', $konten->id) }}' title='Detail'
                                         class='font-medium text-emerald-600 hover:text-emerald-800 dark:text-emerald-500 dark:hover:text-emerald-400'>
                                         <i class='fa-solid fa-eye'></i>
                                     </a>
-                                    <a href='{{ route('konten.edit', $konten->id) }}' title='Edit'
+                                    <a href='{{ route('admin.konten.edit', $konten->id) }}' title='Edit'
                                         class='font-medium text-blue-600 hover:text-blue-800 dark:text-blue-500 dark:hover:text-blue-400'>
                                         <i class='fa-solid fa-pen-to-square'></i>
                                     </a>
                                     <button type='button'
-                                        onclick='openDeleteModal({{ route('konten.destroy', $konten->id) }})' title='Hapus'
+                                        onclick="openDeleteModal('{{ route('admin.konten.destroy', $konten->id) }}')" 
+                                        title='Hapus'
                                         class='font-medium text-red-600 hover:text-red-800 dark:text-red-500 dark:hover:text-red-400'>
                                         <i class='fa-solid fa-trash-can'></i>
                                     </button>
