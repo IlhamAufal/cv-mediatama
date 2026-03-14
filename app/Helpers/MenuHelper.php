@@ -16,30 +16,11 @@ class MenuHelper
                 'path' => '/customer/dashboard',
             ],
             [
-                'icon' => 'calendar',
-                'name' => 'News & Events',
-                'subItems' => [
-                    ['name' => 'News', 'path' => '/news'],
-                    ['name' => 'Events', 'path' => '/events'],
-                ],
-            ],
-            ['icon' => 'forms', 'name' => 'Pilar IBOS', 'path' => '/pillar'],
-
-            [
-                'name' => 'Komunitas',
                 'icon' => 'forms',
-                'path' => '/komunitas'
-            ],
-            [
-                'name' => 'Pengajuan Relawan',
-                'icon' => 'task',
-                'path' => '/pengajuan-relawan',
-            ],
-            [
-                'name' => 'Donasi',
-                'icon' => 'ecommerce',
+                'name' => 'Konten',
                 'subItems' => [
-                    ['name' => 'Riwayat Donasi', 'path' => '/donasi/riwayat'],
+                    ['name' => 'lihat konten',  'path' => '/konten'],
+                    ['name' => 'pengajuan akses konten', 'path' => '/konten/pengajuan'],
                 ],
             ],
 
