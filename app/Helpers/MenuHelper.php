@@ -40,7 +40,7 @@ class MenuHelper
                 'path' => '/admin/dashboard',
             ],
             [
-                'icon' => 'profiles',
+                'icon' => 'user-profile',
                 'name' => 'Manajemen User',
                 'path' => '/user/monitoring',
             ],

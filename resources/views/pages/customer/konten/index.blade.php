@@ -89,7 +89,7 @@
         @empty
 
             <div class="col-span-full text-center py-10 text-gray-500 dark:text-gray-400">
-                Belum ada konten yang tersedia.
+                Admin belum upload konten. Silahkan hubungi administrator untuk informasi lebih lanjut.
             </div>
 
         @endforelse

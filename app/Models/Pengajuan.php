@@ -10,7 +10,7 @@ class Pengajuan extends Model
     use HasFactory;
 
     // Menghindari error nama tabel plural dari Laravel
-    protected $table = 'video_accesses';
+    protected $table = 'pengajuan';
 
     protected $fillable = [
         'user_id',

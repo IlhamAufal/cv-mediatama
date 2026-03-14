@@ -5,17 +5,6 @@
         <div class="relative flex h-screen w-full flex-col justify-center sm:p-0 lg:flex-row dark:bg-gray-900">
             <!-- Form -->
             <div class="flex w-full flex-1 flex-col lg:w-1/2">
-                {{-- <div class="mx-auto w-full max-w-md pt-10">
-                    <a href="/"
-                        class="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
-                        <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                            viewBox="0 0 20 20" fill="none">
-                            <path d="M12.7083 5L7.5 10.2083L12.7083 15.4167" stroke="" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Back to dashboard
-                    </a>
-                </div> --}}
                 <div class="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
                     <div>
                         <div class="mb-5 sm:mb-8">
@@ -23,19 +12,11 @@
                                 Sign In
                             </h1>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                Enter your email and password to sign in!
+                                Masukkan email dan Password yang sesuai!
                             </p>
                         </div>
 
                         <div>
-                            {{-- <div class="relative py-3 sm:py-5">
-                                <div class="absolute inset-0 flex items-center">
-                                    <div class="w-full border-t border-gray-200 dark:border-gray-800"></div>
-                                </div>
-                                <div class="relative flex justify-center text-sm">
-                                    <span class="bg-white p-2 text-gray-400 sm:px-5 sm:py-2 dark:bg-gray-900">Or</span>
-                                </div>
-                            </div> --}}
                             <form method="POST" action="{{ route('signin.post') }}">
                                 @csrf
                                 <div class="space-y-5">
@@ -103,13 +84,9 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                Keep me logged in
+                                                    Biarkan saya tetap masuk
                                             </label>
                                         </div>
-                                        <a href="#"
-                                            class="text-brand-500 hover:text-brand-600 dark:text-brand-400 text-sm">
-                                            Forgot password?
-                                        </a>
                                     </div>
                                     <!-- Button -->
                                     <div>

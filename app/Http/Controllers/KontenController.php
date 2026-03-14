@@ -59,7 +59,7 @@ class KontenController extends Controller
 
         Konten::create($data);
 
-        return redirect()->route('customer.konten.index')->with('success', 'Konten berhasil ditambahkan!');
+        return redirect()->route('admin.konten.index')->with('success', 'Konten berhasil ditambahkan!');
     }
 
     /**
